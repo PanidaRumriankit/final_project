@@ -1,4 +1,4 @@
-# import database module
+import database
 
 # define a funcion called initializing
 
