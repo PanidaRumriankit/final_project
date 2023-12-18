@@ -170,7 +170,6 @@ elif val[1] == 'student':
                                         if p['ID'] == val[0]:
                                             p['type'] = 'member'
                                             break
-                                    exit()
                                 elif len(pj['member2']) == 0 and pj['lead'] != val[0]:
                                     var['response'] = response
                                     response_date = date.today()
@@ -182,14 +181,18 @@ elif val[1] == 'student':
                                             log['role'] = 'member'
                                             print("Accept a member request successfully")
                                             break
-                                break
-
+                                    for p in pr.table:
+                                        if p['ID'] == val[0]:
+                                            p['type'] = 'member'
+                                            break
+                                exit()
                     if response == 'no':
                         print("Deny a member request successfully")
+                        print()
                         var['response'] = response
                         response_date = date.today()
                         var['response_date'] = str(response_date)
-                        print()
+                        exit()
         if choice == '2':
             check = 1
             for att in project_tb.table:
@@ -218,7 +221,8 @@ elif val[1] == 'student':
                 req_mem = input("Which student you want to invite?(answer their id) or 'exit': ")
                 while req_mem != 'exit':
                     tb.table.append({'projectID': pr_id, 'to_be_member': req_mem, 'response': '', 'response_date': ''})
-                    req_mem = input("Which student you want to invite?(answer their id) or 'exit': ")
+                    req_mem = input("Which student you want to invite?(answer their id or 'exit'): ")
+                exit()
         print("Enter the number of a task you want to do.")
         print("1: see pending requests")
         print("2: create a project")
@@ -240,7 +244,7 @@ elif val[1] == 'member':
                 print("Lead:", pj['lead'])
                 print("Member1:", pj['member1'])
                 print("Member2:", pj['member2'])
-                print("Advisor", pj['advisor'])
+                print("Advisor:", pj['advisor'])
                 print("Status:", pj['status'])
                 print()
                 modify = input("Do you want to modify?(answer 'yes' or 'no'): ")
@@ -272,7 +276,7 @@ elif val[1] == 'lead':
                     print("Lead:", pj['lead'])
                     print("Member1:", pj['member1'])
                     print("Member2:", pj['member2'])
-                    print("Advisor", pj['advisor'])
+                    print("Advisor:", pj['advisor'])
                     print("Status:", pj['status'])
                     print()
                     modify = input("Do you want to modify?(answer 'yes' or 'no'): ")
@@ -282,8 +286,10 @@ elif val[1] == 'lead':
                         if choose == 'title':
                             new_title = input("New Title: ")
                             pj['title'] = new_title
-                        elif choose == 'submit':
+                        elif choose == 'submit' and len(pj['advisor']) != 0:
                             pj['status'] = 'submitted'
+                        elif choose == 'submit' and len(pj['advisor']) == 0:
+                            raise ValueError("You should have an advisor first")
                         else:
                             raise ValueError("You should select 'submit' or 'title'")
                     break
@@ -344,7 +350,7 @@ elif val[1] == 'faculty':
                 print("Lead:", pj['lead'])
                 print("Member1:", pj['member1'])
                 print("Member2:", pj['member2'])
-                print("Advisor", pj['advisor'])
+                print("Advisor:", pj['advisor'])
                 print("Status:", pj['status'])
                 print()
         if choice == '2':
@@ -372,6 +378,8 @@ elif val[1] == 'faculty':
                                             p['type'] = 'advisor'
                                             break
                                     exit()
+                                else:
+                                    print("This project already have an advisor")
                                 break
                     if response == 'no':
                         var['response'] = response
@@ -379,10 +387,11 @@ elif val[1] == 'faculty':
                         var['response_date'] = str(response_date)
                         print("Deny an advisor request successfully")
                         print()
+                        exit()
                 break
         if choice == '3':
             project_tb = my_DB.search('project')
-            for pj in project_tb:
+            for pj in project_tb.table:
                 if pj['status'] == 'approved':
                     correct = input("Evaluate the project?(answer 'yes' or 'no'): ")
                     if correct == 'yes':
@@ -409,7 +418,7 @@ elif val[1] == 'advisor':
     while choice != '3':
         project_tb = my_DB.search('project')
         if choice == '1':
-            for pj in project_tb:
+            for pj in project_tb.table:
                 if pj['status'] == 'submitted' and pj['advisor'] == val[0]:
                     correct = input("Is the project ready to be sent to faculty?(answer 'yes' or 'no'): ")
                     if correct == 'yes':
@@ -418,7 +427,7 @@ elif val[1] == 'advisor':
                         comment = input("Comment: ")
                         pj['status'] = 'comment: ' + comment
         if choice == '2':
-            for pj in project_tb:
+            for pj in project_tb.table:
                 if pj['status'] == 'evaluated':
                     prove = input("Do you want to approve?(answer 'yes' or 'no'): ")
                     if prove == 'yes':
@@ -428,8 +437,7 @@ elif val[1] == 'advisor':
         print("Enter the number of a task you want to do.")
         print("1: see all project")
         print("2: response to the pending requests")
-        print("3: evaluate the project")
-        print("4: exit")
+        print("3: exit")
         choice = input("Which task would you choose?: ")
 
 # see and do advisor related activities
