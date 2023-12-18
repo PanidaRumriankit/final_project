@@ -29,10 +29,9 @@
       * if you are a lead
           you can see all your project information, modify(change its name or submit), and send the member requests
       * if you are a faculty
-          you can see all projects information, see a pending project, evaluate project after the advisor evaluated it (give a comment or send to advisor to approve it)
+          you can see all projects information, see a pending project, evaluate project after the advisor approved it (give a comment or mark as finished)
       * if you are an advisor
-          you can evaluate (give a comment or send to faculty to evaluate it after you think it's good enough), approve it so the project finish after this step
-        
+          you can evaluate (give a comment or marked as 'evaluated'), approve it and give it to faculty to evaluate it
 | Role   |  Action                    | Method  | Class  | Completion percentage  |
 |--------|----------------------------|---------|--------|------------------------|
 |Admin   |editing a dictionary by keys|    -    |   -    |         100%           |
@@ -45,10 +44,10 @@
 |Lead    |change project's name       |    -    |   -    |         100%           |
 |Lead    |send the request to students|    -    |   -    |         100%           |
 |Faculty |see the project information |    -    |   -    |         100%           |
-|Faculty |response a pending project  |    -    |   -    |          50%           |
+|Faculty |response a pending project  |    -    |   -    |         100%           |
 |Faculty |evaluate a project          |    -    |   -    |         100%           |
 |Advisor |evaluate a project          |    -    |   -    |         100%           |
 |Advisor |approve a project           |    -    |   -    |         100%           |
 
 * Bugs: 
-  a faculty does not updates after response 'no'
+  not have a big bug but some functions are hard to use
