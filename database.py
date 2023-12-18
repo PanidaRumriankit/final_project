@@ -2,7 +2,7 @@
 
 import copy
 import csv
-import os
+import secrets
 
 
 
@@ -20,17 +20,7 @@ class DB:
                 return table
         return None
 
-    def insert_by_csv(self, file):
-        __location__ = os.path.realpath(
-            os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
-        saving = []
-        with open(os.path.join(__location__, file)) as f:
-            rows = csv.DictReader(f)
-            for r in rows:
-                saving.append(dict(r))
-
-        self.insert(saving)
 
     # def entry(self):
     #     for table in self.database:
@@ -43,7 +33,7 @@ class DB:
 
 
 class Table:
-    def __init__(self, table_name, table):
+    def __init__(self, table=[], table_name=''):
         self.table_name = table_name
         self.table = table
         self.key = {}
@@ -82,13 +72,30 @@ class Table:
             temps.append(dict_temp)
         return temps
 
-    def add(self, ins, key=''):
+    def add(self, ins):
         self.table.append(ins)
-        if len(key) != 0:
-            self.key[key] = len(self.table) - 1
+        safe = secrets.token_urlsafe(16)
+        self.key[safe] = len(self.table) - 1
+        # if len(key) != 0:
+        #     self.key[key] = len(self.table) - 1
 
     def update(self, new, key):
         self.table[self.key[key]] = new
+
+    def insert_by_csv(self, file, name):
+        f = open(file, 'r')
+        reader = csv.DictReader(f)
+        saving = []
+        for num, dic in enumerate(reader):
+            # store = list()
+            # store.append(dic)
+            saving.append(dic)
+            safe = secrets.token_urlsafe(16)
+            self.key[safe] = num
+            # print(self.key)
+        self.table = saving
+        self.table_name = name
+        return self
 
     def __str__(self):
         return self.table_name + ':' + str(self.table)
@@ -98,9 +105,12 @@ class Table:
 
 
 # modify the code in the Table class so that it supports the update operation where an entry's value associated with a key can be updated
-table = Table('persons', persons)
-my_db = DB()
-my_db.insert(table)
-print(my_db.search('persons'))
+#
+# my_DB = DB
+# table = Table()
+# table.insert_by_csv('persons.csv', 'persons')
+# print('name ', table.table_name)
+# print('table ', table.table)
+# print('key ', table.key)
 
 
