@@ -14,10 +14,11 @@
       an inviting to be an advisor table
   - member_pending_request.csv
       an inviting to be a member table
-* How to run the program ?
-  - click run, input your username and password
+* How to run the program ? each question the program ask will have examples for answering
+	- A student create a project, send invite request to be a member to other students. If other students accept, project information will be update. If the student in a group are 3 already, the project is ready to be submitted. if the project is alreadx submittrf
+  - click run, input your username and passwordelde
       * if you are an admin
-          you can update the tables by editing a dictionary in a list using key that generate in initializing step
+          you can update the tables by editing a dictionary in a list using key that generate in initialization step
       * if you are a student
           you can choose to see a pending project or create a project
           - see a pending project
