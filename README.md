@@ -3,7 +3,7 @@
   - database.py
       database class and table class
   - project_manage.py
-      
+      main program
   - persons.csv
       Collect persons information
   - project.csv
