@@ -50,5 +50,5 @@
 |Advisor |evaluate a project          |    -    |   -    |         100%           |
 |Advisor |approve a project           |    -    |   -    |         100%           |
 
-* Bugs
+* Bugs: 
   a faculty does not updates after response 'no'
