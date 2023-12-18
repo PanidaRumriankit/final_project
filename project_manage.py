@@ -395,7 +395,7 @@ elif val[1] == 'faculty':
                 if pj['status'] == 'approved':
                     correct = input("Evaluate the project?(answer 'yes' or 'no'): ")
                     if correct == 'yes':
-                        pj['status'] = ' faculty evaluated'
+                        pj['status'] = 'finished'
                     elif correct == 'no':
                         comment = input("Comment: ")
                         pj['status'] = 'comment: ' + comment
