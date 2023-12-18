@@ -32,6 +32,7 @@
           you can see all projects information, see a pending project, evaluate project after the advisor approved it (give a comment or mark as finished)
       * if you are an advisor
           you can evaluate (give a comment or marked as 'evaluated'), approve it and give it to faculty to evaluate it
+        
 | Role   |  Action                    | Method  | Class  | Completion percentage  |
 |--------|----------------------------|---------|--------|------------------------|
 |Admin   |editing a dictionary by keys|    -    |   -    |         100%           |
